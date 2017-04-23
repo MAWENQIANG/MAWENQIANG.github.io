@@ -22,8 +22,6 @@
 <meta name="twitter:description" content="尚未佩妥剑，转眼便江湖，愿历尽千帆，归来仍少年">
 
     
-    <link rel="alternative" href="/ato.xml" title="M_W_Q" type="application/atom+xml">
-    
     
     <link rel="icon" href="/img/favicon.ico">
     
@@ -41,7 +39,7 @@
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="M_W_Q">M_W_Q</a></h1>
-				<h2 class="blog-motto"></h2>
+				<h2 class="blog-motto">尚未佩妥剑，转眼便江湖，愿历尽千帆，归来仍少年</h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
@@ -71,66 +69,23 @@
     <div id="container">
       <div id="main">
 
-   
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/23/Mysql的max_allowed_packet问题/" title="Mysql max_allowed_packet" itemprop="url">
+  
+    <h1 itemprop="name">Mysql max_allowed_packet</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >Mysql的max_allowed_packet问题
+
+&amp;emsp;&amp;emsp;在初学mysql时我们可能不会遇到max_allowed_packet的问题，但当你需要一次写入大量的数据时，就可能会遇到mysql提示写入的数据过大问题。
+1.什么是max_allowed_pack</p>
+        
     
-      <a href="/2017/04/23/Mysql的max_allowed_packet问题/" title="Mysql max_allowed_packet" itemprop="url">Mysql max_allowed_packet</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="M_W_Q" target="_blank" itemprop="author">M_W_Q</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-23T18:48:49.000Z" itemprop="datePublished"> 发表于 2017-04-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Mysql的max_allowed_packet问题</p>
-<hr>
-<p>&emsp;&emsp;在初学mysql时我们可能不会遇到max_allowed_packet的问题，但当你需要一次写入大量的数据时，就可能会遇到mysql提示写入的数据过大问题。</p>
-<p>1.什么是max_allowed_packet：<br>&emsp;&emsp;max_allowed_packet是mysql允许插入一条数据的大小</p>
-<p>2.查看max_allowed_packe：<br>&emsp;&emsp;在mysql的命令行模式中使用</p>
-<pre><code>show VARIABLES like     &apos;%max_allowed_packet%’;
-</code></pre><p><img src="http://img.blog.csdn.net/20170419133351579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTV9BTEw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="@查看结果如下"><br>3.解决的办法：(对mysql的max_allowed_packet的修改。（3种方式）)</p>
-<ul>
-<li><p>修改my.cnf文件，设置max_allowed_packet=16M，该方法简单并且永久的生效。完成这些以后必须做的就是对mysql的重启和项目中对数据库要重新连接，也就是说重启你的服务（以spring boot来说，其他类似）。</p>
-</li>
-<li><p>进入mysql的命令行模式，使用set global max_allowed_packet = 2 * 1024 * 1024 * 10;来进行设置大小，可以根据你项目的需求来进行调整，在出错误时mysql是会提示你插入的数据包的大小和你当前允许的数据包的大小的。这是不需要对musql进行重启的，重启后会恢复到以前的设置，所以切记不要重启。当然和上一个相同你的服务还是要重启的。</p>
-</li>
-<li>在终端 使用mysql –max_allowed_packet=32M 来进行设置。（没有试过，有兴趣的可以试试。然后记得回复我）</li>
-</ul>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/23/Mysql的max_allowed_packet问题/#comments" class="ds-thread-count comments-count-link" data-thread-key="2017/04/23/Mysql的max_allowed_packet问题/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
+    <time datetime="2017-04-23T18:48:49.000Z" itemprop="datePublished">2017-04-23</time>
+  </a>
+</section>
 
 
 
@@ -193,7 +148,7 @@
 
 
   <div class="rsspart">
-	<a href="/ato.xml" target="_blank" title="rss">RSS 订阅</a>
+	<a href="undefined" target="_blank" title="rss">RSS 订阅</a>
 </div>
 
   <div class="weiboshow">
@@ -359,6 +314,35 @@ var _hmt = _hmt || [];
 
 <!-- MathJax Begin -->
 <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <!-- MathJax End -->
