@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Mysql max_allowed_packet | M_W_Q</title>
+    <title>Mysql Max_allowed_packet | M_W_Q</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M_W_Q">
@@ -14,14 +14,14 @@
     <meta name="description" content="Mysql的max_allowed_packet问题  &amp;emsp;&amp;emsp;在初学mysql时我们可能不会遇到max_allowed_packet的问题，但当你需要一次写入大量的数据时，就可能会遇到mysql提示写入的数据过大问题。 1.什么是max_allowed_packet：&amp;emsp;&amp;emsp;max_allowed_packet是mysql允许插入一条数据的大小 2.查看max_a">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql max_allowed_packet">
+<meta property="og:title" content="Mysql Max_allowed_packet">
 <meta property="og:url" content="http://mawenqiang.github.io/2017/04/23/Mysql的max_allowed_packet问题/index.html">
 <meta property="og:site_name" content="M_W_Q">
 <meta property="og:description" content="Mysql的max_allowed_packet问题  &amp;emsp;&amp;emsp;在初学mysql时我们可能不会遇到max_allowed_packet的问题，但当你需要一次写入大量的数据时，就可能会遇到mysql提示写入的数据过大问题。 1.什么是max_allowed_packet：&amp;emsp;&amp;emsp;max_allowed_packet是mysql允许插入一条数据的大小 2.查看max_a">
 <meta property="og:image" content="http://img.blog.csdn.net/20170419133351579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTV9BTEw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-04-23T20:26:05.000Z">
+<meta property="og:updated_time" content="2017-04-23T20:44:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql max_allowed_packet">
+<meta name="twitter:title" content="Mysql Max_allowed_packet">
 <meta name="twitter:description" content="Mysql的max_allowed_packet问题  &amp;emsp;&amp;emsp;在初学mysql时我们可能不会遇到max_allowed_packet的问题，但当你需要一次写入大量的数据时，就可能会遇到mysql提示写入的数据过大问题。 1.什么是max_allowed_packet：&amp;emsp;&amp;emsp;max_allowed_packet是mysql允许插入一条数据的大小 2.查看max_a">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170419133351579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTV9BTEw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
@@ -77,7 +77,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/23/Mysql的max_allowed_packet问题/" title="Mysql max_allowed_packet" itemprop="url">Mysql max_allowed_packet</a>
+      <a href="/2017/04/23/Mysql的max_allowed_packet问题/" title="Mysql Max_allowed_packet" itemprop="url">Mysql Max_allowed_packet</a>
   </h1>
   <p class="article-author">By
        
@@ -109,7 +109,8 @@
 </li>
 <li><p>进入mysql的命令行模式，使用set global max_allowed_packet = 2 * 1024 * 1024 * 10;来进行设置大小，可以根据你项目的需求来进行调整，在出错误时mysql是会提示你插入的数据包的大小和你当前允许的数据包的大小的。这是不需要对musql进行重启的，重启后会恢复到以前的设置，所以切记不要重启。当然和上一个相同你的服务还是要重启的。</p>
 </li>
-<li>在终端 使用mysql –max_allowed_packet=32M 来进行设置。（没有试过，有兴趣的可以试试。然后记得回复我）</li>
+<li><p>在终端 使用mysql –max_allowed_packet=32M 来进行设置。（没有试过，有兴趣的可以试试。然后记得回复我）</p>
+</li>
 </ul>
   
 	</div>
@@ -123,7 +124,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mawenqiang.github.io/2017/04/23/Mysql的max_allowed_packet问题/" data-title="Mysql max_allowed_packet | M_W_Q" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mawenqiang.github.io/2017/04/23/Mysql的max_allowed_packet问题/" data-title="Mysql Max_allowed_packet | M_W_Q" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -134,9 +135,22 @@
    	       
 	</article>
 	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/04/23/this-my-new-blog/"  title="This My New Blog">
+ <strong>下一篇：</strong><br/> 
+ <span>This My New Blog
+</span>
+</a>
+</div>
+
+</nav>
+
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/04/23/Mysql的max_allowed_packet问题/" data-title="Mysql max_allowed_packet" data-url="http://mawenqiang.github.io/2017/04/23/Mysql的max_allowed_packet问题/"></div>
+	<div class="ds-thread" data-thread-key="2017/04/23/Mysql的max_allowed_packet问题/" data-title="Mysql Max_allowed_packet" data-url="http://mawenqiang.github.io/2017/04/23/Mysql的max_allowed_packet问题/"></div>
 </section>
 
 
