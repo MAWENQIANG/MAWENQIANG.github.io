@@ -18,7 +18,7 @@
 <meta property="og:url" content="http://mawenqiang.github.io/2017/05/08/什么是docker/index.html">
 <meta property="og:site_name" content="M_W_Q">
 <meta property="og:description" content="什么是docker Docker是开源的平台，它包括有容器引擎和Docker Hub注册服务器 Docker容器引擎可以让开发者打包应用和依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上。 Docker Hub注册服务器用户可以在上面建立自己的镜像仓库来存储，管理和分享镜像，实现使用docker一次配置处处运行    容器与虚拟机的对比&amp;emsp;&amp;emsp;docker是容器的一">
-<meta property="og:updated_time" content="2017-05-09T08:40:11.000Z">
+<meta property="og:updated_time" content="2017-05-09T16:55:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="让我们一起来学习Docker（一）">
 <meta name="twitter:description" content="什么是docker Docker是开源的平台，它包括有容器引擎和Docker Hub注册服务器 Docker容器引擎可以让开发者打包应用和依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上。 Docker Hub注册服务器用户可以在上面建立自己的镜像仓库来存储，管理和分享镜像，实现使用docker一次配置处处运行    容器与虚拟机的对比&amp;emsp;&amp;emsp;docker是容器的一">
@@ -113,9 +113,97 @@
 </ul>
 </li>
 <li><p>不同点</p>
-<p>  | 描述 | 容器 | 虚拟机 |<br>  |:—–:|:—–|:———|<br>|操作系统|性能上得优势，能轻易运行多个操作系统|可以安装任何系统性能较差|<br>|原理|和宿主主机共享内核，所有的容器运行在容器引擎之上，容器并不是一个完整的操作系统它们是所有容器共享操作系统，在进程级别进行隔离|每一个都是建立在虚拟的硬件之上，提供指令级的虚拟，每一个都是完整的操作系统|<br>|优点| 更为集中和高效，一个节点能够运行相当多的容器，非常的节省资源，内核由提供者升级，服务由服务提供者管理|对于操作系统有绝对的权限，自己来完成系统的升级和版本控制，具有一整套的资源，每一个虚拟机和真实的物理机相同，可以运行在同一个物理节点|<br>|资源管理|弹性的资源分配|每个资源的添加都需要操作系统重新对资源的分配，需要重启|<br>|远程管理|只要容器里面的操作系统启动，可以通过shell和远程桌面进行|远程控制由虚拟化的平台提供，可以在启动之前连接，所以可以安装操作系统|<br>|缺点|对内核没有控制权限，只有容器提供者可以升级，只有一个内核运行在物理节点上，几乎不能实现不同操作系统的混合|每一台虚拟机需要耗费极大的资源和负载，需要用户管理，由于物理机的资源问题可以运行的虚拟机个数也是有限制的|<br>|配置|极速的配置，可以很快的准备好|需要较长的时间，物理机的性能也有很大的关系，而且需要自行安装操作系统|<br>|启动时间|秒级|分级|<br>|硬盘的使用|MB|GB|<br>|性能|和原生相似|弱于原生|<br>|系统支持量|单机支持上千个|一般受物理资源的限制不过能用几十个|</p>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">容器</th>
+<th>虚拟机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">操作系统</td>
+<td style="text-align:left">性能上得优势，能轻易运行多个操作系统</td>
+<td>可以安装任何系统性能较差</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">原理</td>
+<td style="text-align:left">和宿主主机共享内核，所有的容器运行在容器引擎之上，容器并不是一个完整的操作系统它们是所有容器共享操作系统，在进程级别进行隔离</td>
+<td>每一个都是建立在虚拟的硬件之上，提供指令级的虚拟，每一个都是完整的操作系统</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">优点</td>
+<td style="text-align:left">更为集中和高效，一个节点能够运行相当多的容器，非常的节省资源，内核由提供者升级，服务由服务提供者管理</td>
+<td>对于操作系统有绝对的权限，自己来完成系统的升级和版本控制，具有一整套的资源，每一个虚拟机和真实的物理机相同，可以运行在同一个物理节点</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">资源管理</td>
+<td style="text-align:left">弹性的资源分配</td>
+<td>每个资源的添加都需要操作系统重新对资源的分配，需要重启</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">远程管理</td>
+<td style="text-align:left">只要容器里面的操作系统启动，可以通过shell和远程桌面进行</td>
+<td>远程控制由虚拟化的平台提供，可以在启动之前连接，所以可以安装操作系统</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">缺点</td>
+<td style="text-align:left">对内核没有控制权限，只有容器提供者可以升级，只有一个内核运行在物理节点上，几乎不能实现不同操作系统的混合</td>
+<td>每一台虚拟机需要耗费极大的资源和负载，需要用户管理，由于物理机的资源问题可以运行的虚拟机个数也是有限制的</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">配置</td>
+<td style="text-align:left">极速的配置，可以很快的准备好</td>
+<td>需要较长的时间，物理机的性能也有很大的关系，而且需要自行安装操作系统</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">启动时间</td>
+<td style="text-align:left">秒级</td>
+<td>分级</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">硬盘的使用</td>
+<td style="text-align:left">MB</td>
+<td>GB</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">性能</td>
+<td style="text-align:left">和原生相似</td>
+<td>弱于原生</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:left">系统支持量</td>
+<td style="text-align:left">单机支持上千个</td>
+<td>一般受物理资源的限制不过能用几十个</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="docker的应用场景"><a href="#docker的应用场景" class="headerlink" title="docker的应用场景"></a><em>docker的应用场景</em></h2><ul>
 <li>加速本地开发，通过docker可以快速的构建开发环境和运行环境并且提供其他开发人员的使用。</li>
 <li>自动打包和部署应用</li>
@@ -217,10 +305,6 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/M/" title="M">M<sup>1</sup></a></li>
 			
 		
@@ -229,11 +313,15 @@
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Json/" title="Json">Json<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 		</ul>
