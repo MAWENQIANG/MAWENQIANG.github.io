@@ -4,28 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Mysql Max_allowed_packet | M_W_Q</title>
+    <title>Linux下安装jdk（Centos版） | M_W_Q</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="M_W_Q">
     
 
     
-    <meta name="description" content="Mysql的max_allowed_packet问题&amp;emsp;&amp;emsp;在初学mysql时我们可能不会遇到max_allowed_packet的问题，但当你需要一次写入大量的数据时，就可能会遇到mysql提示写入的数据过大问题。 1.什么是max_allowed_packet：&amp;emsp;&amp;emsp;max_allowed_packet是mysql允许插入一条数据的大小 2.查看max_all">
-<meta name="keywords" content="mysql">
+    <meta name="description" content="$Linux下安装jdk（Centos版）$准备工作 下载jdk，选择你需要的版本。（下载） linux环境（需要理解基本的命令）  基本的命令1234sudo                     //获得root权限mkdir xxx                //创建XXX文件夹mv file path             //移动file到path路径tar -zcvf   xx">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql Max_allowed_packet">
-<meta property="og:url" content="http://mawenqiang.github.io/2017/04/23/Mysql的max_allowed_packet问题/index.html">
+<meta property="og:title" content="Linux下安装jdk（Centos版）">
+<meta property="og:url" content="http://mawenqiang.github.io/2017/06/02/jkd安装/index.html">
 <meta property="og:site_name" content="M_W_Q">
-<meta property="og:description" content="Mysql的max_allowed_packet问题&amp;emsp;&amp;emsp;在初学mysql时我们可能不会遇到max_allowed_packet的问题，但当你需要一次写入大量的数据时，就可能会遇到mysql提示写入的数据过大问题。 1.什么是max_allowed_packet：&amp;emsp;&amp;emsp;max_allowed_packet是mysql允许插入一条数据的大小 2.查看max_all">
-<meta property="og:image" content="http://img.blog.csdn.net/20170419133351579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTV9BTEw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/
-gravity/SouthEast">
-<meta property="og:updated_time" content="2017-04-23T23:36:22.000Z">
+<meta property="og:description" content="$Linux下安装jdk（Centos版）$准备工作 下载jdk，选择你需要的版本。（下载） linux环境（需要理解基本的命令）  基本的命令1234sudo                     //获得root权限mkdir xxx                //创建XXX文件夹mv file path             //移动file到path路径tar -zcvf   xx">
+<meta property="og:updated_time" content="2017-09-09T00:38:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql Max_allowed_packet">
-<meta name="twitter:description" content="Mysql的max_allowed_packet问题&amp;emsp;&amp;emsp;在初学mysql时我们可能不会遇到max_allowed_packet的问题，但当你需要一次写入大量的数据时，就可能会遇到mysql提示写入的数据过大问题。 1.什么是max_allowed_packet：&amp;emsp;&amp;emsp;max_allowed_packet是mysql允许插入一条数据的大小 2.查看max_all">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170419133351579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTV9BTEw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/
-gravity/SouthEast">
+<meta name="twitter:title" content="Linux下安装jdk（Centos版）">
+<meta name="twitter:description" content="$Linux下安装jdk（Centos版）$准备工作 下载jdk，选择你需要的版本。（下载） linux环境（需要理解基本的命令）  基本的命令1234sudo                     //获得root权限mkdir xxx                //创建XXX文件夹mv file path             //移动file到path路径tar -zcvf   xx">
 
     
     
@@ -79,14 +75,14 @@ gravity/SouthEast">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/23/Mysql的max_allowed_packet问题/" title="Mysql Max_allowed_packet" itemprop="url">Mysql Max_allowed_packet</a>
+      <a href="/2017/06/02/jkd安装/" title="Linux下安装jdk（Centos版）" itemprop="url">Linux下安装jdk（Centos版）</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="M_W_Q" target="_blank" itemprop="author">M_W_Q</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-23T18:48:49.000Z" itemprop="datePublished"> 发表于 2017-04-23</time>
+    <time datetime="2017-06-02T15:54:49.000Z" itemprop="datePublished"> 发表于 2017-06-02</time>
     
   </p>
 </header>
@@ -95,24 +91,18 @@ gravity/SouthEast">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql的max-allowed-packet问题"><span class="toc-number">1.</span> <span class="toc-text">Mysql的max_allowed_packet问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-什么是max-allowed-packet："><span class="toc-number">2.</span> <span class="toc-text">1.什么是max_allowed_packet：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-查看max-allowed-packe："><span class="toc-number">3.</span> <span class="toc-text">2.查看max_allowed_packe：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-解决的办法：-对mysql的max-allowed-packet的修改。（3种方式）"><span class="toc-number">4.</span> <span class="toc-text">3.解决的办法：(对mysql的max_allowed_packet的修改。（3种方式）)</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux下安装jdk（Centos版）"><span class="toc-number">1.</span> <span class="toc-text">$Linux下安装jdk（Centos版）$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的命令"><span class="toc-number">3.</span> <span class="toc-text">基本的命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始创建安装位置"><span class="toc-number">4.</span> <span class="toc-text">开始创建安装位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看是否生效"><span class="toc-number">5.</span> <span class="toc-text">查看是否生效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多说点"><span class="toc-number">6.</span> <span class="toc-text">多说点</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="Mysql的max-allowed-packet问题"><a href="#Mysql的max-allowed-packet问题" class="headerlink" title="Mysql的max_allowed_packet问题"></a><strong>Mysql的max_allowed_packet问题</strong></h2><p>&emsp;&emsp;在初学mysql时我们可能不会遇到max_allowed_packet的问题，但当你需要一次写入大量的数据时，就可能会遇到mysql提示写入的数据过大问题。</p>
-<h2 id="1-什么是max-allowed-packet："><a href="#1-什么是max-allowed-packet：" class="headerlink" title="1.什么是max_allowed_packet："></a>1.什么是max_allowed_packet：</h2><p>&emsp;&emsp;max_allowed_packet是mysql允许插入一条数据的大小</p>
-<h2 id="2-查看max-allowed-packe："><a href="#2-查看max-allowed-packe：" class="headerlink" title="2.查看max_allowed_packe："></a>2.查看max_allowed_packe：</h2><p>&emsp;&emsp;在mysql的命令行模式中使用</p>
-<pre><code>show VARIABLES like     &apos;%max_allowed_packet%’;
-</code></pre><p><img src="http://img.blog.csdn.net/20170419133351579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvTV9BTEw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/
-gravity/SouthEast" alt="@查看结果如下"></p>
-<h2 id="3-解决的办法：-对mysql的max-allowed-packet的修改。（3种方式）"><a href="#3-解决的办法：-对mysql的max-allowed-packet的修改。（3种方式）" class="headerlink" title="3.解决的办法：(对mysql的max_allowed_packet的修改。（3种方式）)"></a>3.解决的办法：(对mysql的max_allowed_packet的修改。（3种方式）)</h2><ul>
-<li><p>修改my.cnf文件，设置max_allowed_packet=16M，该方法简单并且永久的生效。完成这些以后必须做的就是对mysql的重启和项目中对数据库要重新连接，也就是说重启你的服务（以spring boot来说，其他类似）。</p>
-</li>
-<li><p>进入mysql的命令行模式，使用set global max_allowed_packet = 2 * 1024 * 1024 * 10;来进行设置大小，可以根据你项目的需求来进行调整，在出错误时mysql是会提示你插入的数据包的大小和你当前允许的数据包的大小的。这是不需要对musql进行重启的，重启后会恢复到以前的设置，所以切记不要重启。当然和上一个相同你的服务还是要重启的。</p>
-</li>
-<li><p>在终端 使用mysql –max_allowed_packet=32M 来进行设置。（没有试过，有兴趣的可以试试。然后记得回复我）</p>
-</li>
-</ul>
+		<h2 id="Linux下安装jdk（Centos版）"><a href="#Linux下安装jdk（Centos版）" class="headerlink" title="$Linux下安装jdk（Centos版）$"></a>$Linux下安装jdk（Centos版）$</h2><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a><strong>准备工作</strong></h2><ol>
+<li>下载jdk，选择你需要的版本。（<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">下载</a>）</li>
+<li>linux环境（需要理解基本的命令）</li>
+</ol>
+<h2 id="基本的命令"><a href="#基本的命令" class="headerlink" title="基本的命令"></a><strong>基本的命令</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo                     //获得root权限</div><div class="line">mkdir xxx                //创建XXX文件夹</div><div class="line">mv file path             //移动file到path路径</div><div class="line">tar -zcvf   xxx.tar.gz   //解压xxx文件</div></pre></td></tr></table></figure>
+<h2 id="开始创建安装位置"><a href="#开始创建安装位置" class="headerlink" title="开始创建安装位置"></a><strong>开始创建安装位置</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//拥有root权限（需要输入你的用户密码）</div><div class="line">sudo              </div><div class="line">//这是我的安装目录，你可以根据自己想安装的位置进行创建</div><div class="line">mkdir /usr/java  </div><div class="line">//移动下载好的jdk到你想要安装的位置 </div><div class="line">mv jdk-8u112-linux-x64.tar.gz /usr/java/</div><div class="line">//解压tar.gz压缩包</div><div class="line">tar -zxvf jdk-8u112-linux-x64.tar.gz</div><div class="line">//设置java环境</div><div class="line">vim ~/.bashrc</div><div class="line">//在打开的文件里面编写如下文件（注意JAVA_HOME是你自己上面jdk的bin路径）</div><div class="line">export JAVA_HOME=/usr/java/jdk1.8.0_112</div><div class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</div><div class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</div><div class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</div><div class="line">//生效jdk配置</div><div class="line">source ~/.bashrc</div></pre></td></tr></table></figure>
+<h2 id="查看是否生效"><a href="#查看是否生效" class="headerlink" title="查看是否生效"></a><strong>查看是否生效</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">java -version</div><div class="line">//出现如下结果</div><div class="line">java version &quot;1.8.0_112&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_112-b15)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.112-b15, mixed mode)</div></pre></td></tr></table></figure>
+<h2 id="多说点"><a href="#多说点" class="headerlink" title="多说点"></a><strong>多说点</strong></h2><p>如果你看其他教程的，会发现好多都是使用如下命令中配置jdk环境，不要在意这些两种方式都是可以的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/profile</div></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -121,7 +111,7 @@ gravity/SouthEast" alt="@查看结果如下"></p>
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/mysql/">mysql</a>
+  <span></span> <a href="/tags/java/">java</a>
   </div>
 
 </div>
@@ -130,7 +120,7 @@ gravity/SouthEast" alt="@查看结果如下"></p>
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mawenqiang.github.io/2017/04/23/Mysql的max_allowed_packet问题/" data-title="Mysql Max_allowed_packet | M_W_Q" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mawenqiang.github.io/2017/06/02/jkd安装/" data-title="Linux下安装jdk（Centos版） | M_W_Q" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -144,18 +134,18 @@ gravity/SouthEast" alt="@查看结果如下"></p>
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/23/Hello 大家好！/" title="Hello 大家好！">
+ <a href="/2017/05/08/什么是docker/" title="让我们一起来学习Docker（一）">
   <strong>上一篇：</strong><br/>
   <span>
-  Hello 大家好！</span>
+  让我们一起来学习Docker（一）</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/04/25/搭建自己的专属博客/"  title="Hexo+github搭建自己的专属博客">
+<a href="/2017/07/09/JAVA类加载机制/"  title="Java类加载机制">
  <strong>下一篇：</strong><br/> 
- <span>Hexo+github搭建自己的专属博客
+ <span>Java类加载机制
 </span>
 </a>
 </div>
@@ -164,7 +154,7 @@ gravity/SouthEast" alt="@查看结果如下"></p>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/04/23/Mysql的max_allowed_packet问题/" data-title="Mysql Max_allowed_packet" data-url="http://mawenqiang.github.io/2017/04/23/Mysql的max_allowed_packet问题/"></div>
+	<div class="ds-thread" data-thread-key="2017/06/02/jkd安装/" data-title="Linux下安装jdk（Centos版）" data-url="http://mawenqiang.github.io/2017/06/02/jkd安装/"></div>
 </section>
 
 
@@ -180,7 +170,7 @@ gravity/SouthEast" alt="@查看结果如下"></p>
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql的max-allowed-packet问题"><span class="toc-number">1.</span> <span class="toc-text">Mysql的max_allowed_packet问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-什么是max-allowed-packet："><span class="toc-number">2.</span> <span class="toc-text">1.什么是max_allowed_packet：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-查看max-allowed-packe："><span class="toc-number">3.</span> <span class="toc-text">2.查看max_allowed_packe：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-解决的办法：-对mysql的max-allowed-packet的修改。（3种方式）"><span class="toc-number">4.</span> <span class="toc-text">3.解决的办法：(对mysql的max_allowed_packet的修改。（3种方式）)</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux下安装jdk（Centos版）"><span class="toc-number">1.</span> <span class="toc-text">$Linux下安装jdk（Centos版）$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的命令"><span class="toc-number">3.</span> <span class="toc-text">基本的命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始创建安装位置"><span class="toc-number">4.</span> <span class="toc-text">开始创建安装位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看是否生效"><span class="toc-number">5.</span> <span class="toc-text">查看是否生效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多说点"><span class="toc-number">6.</span> <span class="toc-text">多说点</span></a></li></ol>
  
   </div>
 
