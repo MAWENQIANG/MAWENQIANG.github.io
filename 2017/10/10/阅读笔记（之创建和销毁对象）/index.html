@@ -1,0 +1,613 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Effective Java 阅读笔记（之创建和销毁对象） | M_W_Q</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="M_W_Q">
+    
+
+    
+    <meta name="description" content="引言本博客的内容完全是为记录自己的一些读书感悟，如果喜欢可以进行阅读如有问题请指正，谢谢。 思考 什么是构造器，什么是静态工厂方法？ 什么时候用构造器，什么时候用静态工厂方法？  静态工厂方法和构造器静态工厂方法的优点：  静态方法是有名称的，有具体的名称更易于使用者去阅读和了解其功能。如果我需要多个构造器时，使用静态工厂方法可能是最好的。多个构造器除了参数类型等区分不同的功能再没有其他的方式，极">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective Java 阅读笔记（之创建和销毁对象）">
+<meta property="og:url" content="http://mawenqiang.github.io/2017/10/10/阅读笔记（之创建和销毁对象）/index.html">
+<meta property="og:site_name" content="M_W_Q">
+<meta property="og:description" content="引言本博客的内容完全是为记录自己的一些读书感悟，如果喜欢可以进行阅读如有问题请指正，谢谢。 思考 什么是构造器，什么是静态工厂方法？ 什么时候用构造器，什么时候用静态工厂方法？  静态工厂方法和构造器静态工厂方法的优点：  静态方法是有名称的，有具体的名称更易于使用者去阅读和了解其功能。如果我需要多个构造器时，使用静态工厂方法可能是最好的。多个构造器除了参数类型等区分不同的功能再没有其他的方式，极">
+<meta property="og:updated_time" content="2017-10-22T09:43:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effective Java 阅读笔记（之创建和销毁对象）">
+<meta name="twitter:description" content="引言本博客的内容完全是为记录自己的一些读书感悟，如果喜欢可以进行阅读如有问题请指正，谢谢。 思考 什么是构造器，什么是静态工厂方法？ 什么时候用构造器，什么时候用静态工厂方法？  静态工厂方法和构造器静态工厂方法的优点：  静态方法是有名称的，有具体的名称更易于使用者去阅读和了解其功能。如果我需要多个构造器时，使用静态工厂方法可能是最好的。多个构造器除了参数类型等区分不同的功能再没有其他的方式，极">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="M_W_Q">M_W_Q</a></h1>
+				<h2 class="blog-motto">尚未佩妥剑，转眼便江湖，愿历尽千帆，归来仍少年</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:mawenqiang.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/10/10/阅读笔记（之创建和销毁对象）/" title="Effective Java 阅读笔记（之创建和销毁对象）" itemprop="url">Effective Java 阅读笔记（之创建和销毁对象）</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="M_W_Q" target="_blank" itemprop="author">M_W_Q</a>
+		
+  <p class="article-time">
+    <time datetime="2017-10-10T18:48:49.000Z" itemprop="datePublished"> 发表于 2017-10-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思考"><span class="toc-number">2.</span> <span class="toc-text">思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态工厂方法和构造器"><span class="toc-number">3.</span> <span class="toc-text">静态工厂方法和构造器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用构建器"><span class="toc-number">4.</span> <span class="toc-text">使用构建器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例属性的强化"><span class="toc-number">5.</span> <span class="toc-text">单例属性的强化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的销毁"><span class="toc-number">6.</span> <span class="toc-text">对象的销毁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">7.</span> <span class="toc-text">结束语</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a><strong>引言</strong></h2><p>本博客的内容完全是为记录自己的一些读书感悟，如果喜欢可以进行阅读如有问题请指正，谢谢。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a><strong>思考</strong></h2><ol>
+<li>什么是构造器，什么是静态工厂方法？</li>
+<li>什么时候用构造器，什么时候用静态工厂方法？</li>
+</ol>
+<h2 id="静态工厂方法和构造器"><a href="#静态工厂方法和构造器" class="headerlink" title="静态工厂方法和构造器"></a><strong>静态工厂方法和构造器</strong></h2><p><strong>静态工厂方法的优点：</strong></p>
+<ol>
+<li>静态方法是有名称的，有具体的名称更易于使用者去阅读和了解其功能。如果我需要多个构造器时，使用静态工厂方法可能是最好的。多个构造器除了参数类型等区分不同的功能再没有其他的方式，极易用错。但是静态的构工厂方法可以为每一个提供不同的名称，很容易区分。这种情况使用静态工厂是个好的实现方式。</li>
+<li>静态工厂方法了解加载机制的都知道，它不会再每一次调用时都构建一个新的对象，对于频繁调用时是一个不错的方式。</li>
+<li>静态工厂方法有返回值，在某种用途上我们能够更好的实现。例如后面的构建器。</li>
+<li>实例化参数类型时更加的简洁明了。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//实例化时</span></div><div class="line">Map&lt;String, List&lt;String&gt;&gt; map = <span class="keyword">new</span> HashMap&lt;String, List&lt;String&gt;&gt;();</div><div class="line"><span class="comment">//Google Guava提供的静态实例化方法</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>&lt;K, V&gt; HashMap&lt;K, V&gt; <span class="title">newHashMap</span><span class="params">()</span></span>&#123;</div><div class="line">	reutrn <span class="keyword">new</span> HashMap&lt;K, V&gt;();</div><div class="line">&#125;</div><div class="line"><span class="comment">//实例化时</span></div><div class="line">Map&lt;String, List&lt;String&gt;&gt; map = Maps.newHashMap();</div></pre></td></tr></table></figure>
+<p><strong>静态工厂方法的缺点：</strong></p>
+<ol>
+<li>类如果没有构造器，就不能被子类去类化。</li>
+<li>它们与其他的静态方法没什么区别。API文档中不会提供静态方法的说明，有时候你可能只看文档无法知道如何实例化一个类（当然看源码很容易就知道了）</li>
+</ol>
+<h2 id="使用构建器"><a href="#使用构建器" class="headerlink" title="使用构建器"></a><strong>使用构建器</strong></h2><ol>
+<li>使用构造器是解决静态工厂和构造器的局限性，它们不能很好的扩展到大量的可选择参数。</li>
+<li>普通的要灵活的使用构造的参数个数可能要写大量的构造器去处理，相当的繁琐。</li>
+<li>前期可能使用的参数较少感觉使用构建器反而更复杂，但是后期扩展时很方便。</li>
+</ol>
+<p>构建器的实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">	public class Build &#123;</div><div class="line"></div><div class="line">    private String name;</div><div class="line">    private Integer age;</div><div class="line">    private String desc;</div><div class="line"></div><div class="line">    public static class BuildForm &#123;</div><div class="line">        private String name;</div><div class="line">        private Integer age;</div><div class="line">        private String desc;</div><div class="line"></div><div class="line">        public BuildForm() &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public BuildForm nameBuild(String name) &#123;</div><div class="line">            this.name = name;</div><div class="line">            return this;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public BuildForm ageBuild(Integer age) &#123;</div><div class="line">            this.age = age;</div><div class="line">            return this;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public BuildForm descBuild(String decs) &#123;</div><div class="line">            this.desc = decs;</div><div class="line">            return this;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public Build buildData() &#123;</div><div class="line">            return new Build(this);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    //创建私有构造器防止调用默认构造器处理和处理内部赋值</div><div class="line">    private Build(BuildForm buildForm)&#123;</div><div class="line">        this.name = buildForm.name;</div><div class="line">        this.age = buildForm.age;</div><div class="line">        this.desc = buildForm.desc;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toString() &#123;</div><div class="line">        return &quot;Build&#123;&quot; +</div><div class="line">                &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +</div><div class="line">                &quot;, age=&quot; + age +</div><div class="line">                &quot;, desc=&apos;&quot; + desc + &apos;\&apos;&apos; +</div><div class="line">                &apos;&#125;&apos;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>构建器的使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] argv) &#123;</div><div class="line">        Build buildOne = new Build.BuildForm()</div><div class="line">        .nameBuild(&quot;AA&quot;)</div><div class="line">        .buildData();</div><div class="line">        Build buildTwo = new Build.BuildForm()</div><div class="line">        .nameBuild(&quot;BB&quot;)</div><div class="line">        .ageBuild(12)</div><div class="line">        .buildData();</div><div class="line">        Build buildThree = new Build.BuildForm()</div><div class="line">        .nameBuild(&quot;CC&quot;)</div><div class="line">        .ageBuild(12)</div><div class="line">        .descBuild(&quot;啊哈哈&quot;)</div><div class="line">        .buildData();</div><div class="line"></div><div class="line">        System.out.println(buildOne.toString());</div><div class="line">        System.out.println(buildTwo.toString());</div><div class="line">        System.out.println(buildThree.toString());</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Build&#123;name=&apos;AA&apos;, age=null, desc=&apos;null&apos;&#125;</div><div class="line">Build&#123;name=&apos;BB&apos;, age=12, desc=&apos;null&apos;&#125;</div><div class="line">Build&#123;name=&apos;CC&apos;, age=12, desc=&apos;啊哈哈&apos;&#125;</div></pre></td></tr></table></figure></p>
+<p>以上就是一个简单的构建器，大家可以根据自己的需求去使用。</p>
+<h2 id="单例属性的强化"><a href="#单例属性的强化" class="headerlink" title="单例属性的强化"></a><strong>单例属性的强化</strong></h2><p><strong>私有的构造器</strong></p>
+<p>就如同我上面代码中写到的，如果不使用私有的构造器去处理类，虽然我们的实现是单例的，但是使用者完全可以使用默认的构造器去创建出来新的对象，有时候就违背我们的初衷。</p>
+<p><strong>枚举的方式</strong></p>
+<p>我们可以使用枚举的方式去创建一个单例模式，这样就不会出现上述的情况。创建的方式如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//创建一个类</div><div class="line">public class Factory &#123;</div><div class="line">&#125;</div><div class="line">//枚举的方式实例化类</div><div class="line">public enum  EnumFactory &#123;</div><div class="line">    DATE;</div><div class="line">    private Factory factory;</div><div class="line">    public void buildSingleton()&#123;</div><div class="line">        factory = new Factory();</div><div class="line">    &#125;</div><div class="line">    public Factory getFactory()&#123;</div><div class="line">        return factory;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//类的使用</div><div class="line">public class Main &#123;</div><div class="line"></div><div class="line">    public static void main(String[] argv) &#123;</div><div class="line">        Factory factory = EnumFactory.DATE.getFactory();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>三种单例的创建模式，枚举的方式可能是现在做好的方法。</p>
+<h2 id="对象的销毁"><a href="#对象的销毁" class="headerlink" title="对象的销毁"></a><strong>对象的销毁</strong></h2><p><strong>内存泄露</strong></p>
+<p>对象有创建必然存在销毁，java提供有自己的垃圾回收机制。但是并不代表java不会出现内存泄露。所以我们需要消除过期的对象引用，若过期的对象引用一直存在垃圾回收器就不会去回收资源。一般这种情况发生在引用缓存中。开发中要注意这类情况。下面是三种容易发生内存泄露的情况。</p>
+<ol>
+<li>无意识的泄露，一般是代码考虑不周全导致，没有考虑泄露的意识。</li>
+<li>缓存中存放的对象，一般需要去维护，不然容易出现泄露。</li>
+<li>监听器和回调，这种情况一般是需要维护对象的长期有效的，但是使用完成如果不进行注销就会出现泄露。</li>
+</ol>
+<p><strong>避免使用终结方法</strong></p>
+<p>java有提供终结方法来让开发者去终结，但是终结方法的线程优先级极低，我们并不能去确定终结方法一定会执行，有不能确定终结方法执行的时间。当然有些情况是需要去使用终结方法的，例如流的关闭，一般要配合try….finally来使用。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a><strong>结束语</strong></h2><p>一些简单的介绍，如果要很好的了解建议大家亲自去看看这本书。希望浅薄的理解能对你的开发有帮助。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/java/">java</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://mawenqiang.github.io/2017/10/10/阅读笔记（之创建和销毁对象）/" data-title="Effective Java 阅读笔记（之创建和销毁对象） | M_W_Q" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/07/09/JAVA类加载机制/" title="Java类加载机制">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Java类加载机制</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2017/10/10/阅读笔记（之创建和销毁对象）/" data-title="Effective Java 阅读笔记（之创建和销毁对象）" data-url="http://mawenqiang.github.io/2017/10/10/阅读笔记（之创建和销毁对象）/"></div>
+</section>
+
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思考"><span class="toc-number">2.</span> <span class="toc-text">思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态工厂方法和构造器"><span class="toc-number">3.</span> <span class="toc-text">静态工厂方法和构造器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用构建器"><span class="toc-number">4.</span> <span class="toc-text">使用构建器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例属性的强化"><span class="toc-number">5.</span> <span class="toc-text">单例属性的强化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的销毁"><span class="toc-number">6.</span> <span class="toc-text">对象的销毁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">7.</span> <span class="toc-text">结束语</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="MAWENQIANG" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/M/" title="M">M<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JVM/" title="JVM">JVM<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Json/" title="Json">Json<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://codeceo.com" target="_blank" title="码农圈">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.oschina.net" target="_blank" title="OsChina">OsChina</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net" target="_blank" title="CSND">CSND</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://segmentfault.com" target="_blank" title="Segmentfault">Segmentfault</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.zhihu.com" target="_blank" title="知乎">知乎</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="undefined" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, Welcome to my world <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Wen_Q_M" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/MAWENQIANG" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:malehale@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="M_W_Q">M_W_Q</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"M_W_Q"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'M_W_Q';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_null'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3Dnull' type='text/javascript'%3E%3C/script%3E"));</script>
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
