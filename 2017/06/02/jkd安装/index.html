@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="$Linux下安装jdk（Centos版）$准备工作 下载jdk，选择你需要的版本。（下载） linux环境（需要理解基本的命令）  基本的命令1234sudo                     //获得root权限mkdir xxx                //创建XXX文件夹mv file path             //移动file到path路径tar -zcvf   xx">
+    <meta name="description" content="$Linux下安装jdk（Centos版）$准备工作 下载jdk，选择你需要的版本。（下载） linux环境（需要理解基本的命令）  基本的命令1234sudo                     //获得root权限mkdir xxx                //创建XXX文件夹mv file path             //移动file到path路径tar -zxvf   xx">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下安装jdk（Centos版）">
 <meta property="og:url" content="http://mawenqiang.github.io/2017/06/02/jkd安装/index.html">
 <meta property="og:site_name" content="M_W_Q">
-<meta property="og:description" content="$Linux下安装jdk（Centos版）$准备工作 下载jdk，选择你需要的版本。（下载） linux环境（需要理解基本的命令）  基本的命令1234sudo                     //获得root权限mkdir xxx                //创建XXX文件夹mv file path             //移动file到path路径tar -zcvf   xx">
-<meta property="og:updated_time" content="2017-09-09T00:38:32.000Z">
+<meta property="og:description" content="$Linux下安装jdk（Centos版）$准备工作 下载jdk，选择你需要的版本。（下载） linux环境（需要理解基本的命令）  基本的命令1234sudo                     //获得root权限mkdir xxx                //创建XXX文件夹mv file path             //移动file到path路径tar -zxvf   xx">
+<meta property="og:updated_time" content="2017-11-04T11:52:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下安装jdk（Centos版）">
-<meta name="twitter:description" content="$Linux下安装jdk（Centos版）$准备工作 下载jdk，选择你需要的版本。（下载） linux环境（需要理解基本的命令）  基本的命令1234sudo                     //获得root权限mkdir xxx                //创建XXX文件夹mv file path             //移动file到path路径tar -zcvf   xx">
+<meta name="twitter:description" content="$Linux下安装jdk（Centos版）$准备工作 下载jdk，选择你需要的版本。（下载） linux环境（需要理解基本的命令）  基本的命令1234sudo                     //获得root权限mkdir xxx                //创建XXX文件夹mv file path             //移动file到path路径tar -zxvf   xx">
 
     
     
@@ -99,7 +99,7 @@
 <li>下载jdk，选择你需要的版本。（<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">下载</a>）</li>
 <li>linux环境（需要理解基本的命令）</li>
 </ol>
-<h2 id="基本的命令"><a href="#基本的命令" class="headerlink" title="基本的命令"></a><strong>基本的命令</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo                     //获得root权限</div><div class="line">mkdir xxx                //创建XXX文件夹</div><div class="line">mv file path             //移动file到path路径</div><div class="line">tar -zcvf   xxx.tar.gz   //解压xxx文件</div></pre></td></tr></table></figure>
+<h2 id="基本的命令"><a href="#基本的命令" class="headerlink" title="基本的命令"></a><strong>基本的命令</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo                     //获得root权限</div><div class="line">mkdir xxx                //创建XXX文件夹</div><div class="line">mv file path             //移动file到path路径</div><div class="line">tar -zxvf   xxx.tar.gz   //解压xxx文件</div></pre></td></tr></table></figure>
 <h2 id="开始创建安装位置"><a href="#开始创建安装位置" class="headerlink" title="开始创建安装位置"></a><strong>开始创建安装位置</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//拥有root权限（需要输入你的用户密码）</div><div class="line">sudo              </div><div class="line">//这是我的安装目录，你可以根据自己想安装的位置进行创建</div><div class="line">mkdir /usr/java  </div><div class="line">//移动下载好的jdk到你想要安装的位置 </div><div class="line">mv jdk-8u112-linux-x64.tar.gz /usr/java/</div><div class="line">//解压tar.gz压缩包</div><div class="line">tar -zxvf jdk-8u112-linux-x64.tar.gz</div><div class="line">//设置java环境</div><div class="line">vim ~/.bashrc</div><div class="line">//在打开的文件里面编写如下文件（注意JAVA_HOME是你自己上面jdk的bin路径）</div><div class="line">export JAVA_HOME=/usr/java/jdk1.8.0_112</div><div class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</div><div class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</div><div class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</div><div class="line">//生效jdk配置</div><div class="line">source ~/.bashrc</div></pre></td></tr></table></figure>
 <h2 id="查看是否生效"><a href="#查看是否生效" class="headerlink" title="查看是否生效"></a><strong>查看是否生效</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">java -version</div><div class="line">//出现如下结果</div><div class="line">java version &quot;1.8.0_112&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_112-b15)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.112-b15, mixed mode)</div></pre></td></tr></table></figure>
 <h2 id="多说点"><a href="#多说点" class="headerlink" title="多说点"></a><strong>多说点</strong></h2><p>如果你看其他教程的，会发现好多都是使用如下命令中配置jdk环境，不要在意这些两种方式都是可以的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/profile</div></pre></td></tr></table></figure></p>
@@ -204,11 +204,11 @@
 			
 		
 			
-				<li><a href="/tags/JVM/" title="JVM">JVM<sup>1</sup></a></li>
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+				<li><a href="/tags/JVM/" title="JVM">JVM<sup>1</sup></a></li>
 			
 		
 			
@@ -216,11 +216,11 @@
 			
 		
 			
-				<li><a href="/tags/Json/" title="Json">Json<sup>1</sup></a></li>
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Json/" title="Json">Json<sup>1</sup></a></li>
 			
 		
 		</ul>
